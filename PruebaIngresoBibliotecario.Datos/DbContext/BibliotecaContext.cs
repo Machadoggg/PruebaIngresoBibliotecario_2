@@ -4,12 +4,12 @@ using PruebaIngresoBibliotecario.Dominio;
 
 namespace PruebaIngresoBibliotecario.Datos
 {
-    public class PersistenceContext : DbContext
+    public class BibliotecaContext : DbContext
     {
 
         private readonly IConfiguration Config;
 
-        public PersistenceContext(DbContextOptions<PersistenceContext> options, IConfiguration config) : base(options)
+        public BibliotecaContext(DbContextOptions<BibliotecaContext> options, IConfiguration config) : base(options)
         {
             Config = config;
         }

@@ -29,7 +29,7 @@ namespace PruebaIngresoBibliotecario.Api
 
             services.AddSwaggerDocument();
 
-            services.AddDbContext<PersistenceContext>(opt =>
+            services.AddDbContext<BibliotecaContext>(opt =>
             {
                 opt.UseInMemoryDatabase("PruebaIngreso");
             });

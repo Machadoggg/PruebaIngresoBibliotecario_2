@@ -7,11 +7,11 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
     public class PrestamoLibroRepositorio : IPrestamoLibroRepositorio
     {
 
-        private readonly PersistenceContext _PersistenceContext;
+        private readonly BibliotecaContext _bibliotecaContext;
 
-        public PrestamoLibroRepositorio(PersistenceContext PersistenceContext)
+        public PrestamoLibroRepositorio(BibliotecaContext bibliotecaContext)
         {
-            _PersistenceContext = PersistenceContext;
+            _bibliotecaContext = bibliotecaContext;
         }
 
 
@@ -36,14 +36,14 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
 
                     prestamoLibro.FechaMaximaDevolucion = fechaDevolucion;
                     prestamoLibro.Id = Guid.NewGuid();
-                    _PersistenceContext.PrestamoLibros.Add(prestamoLibro);
+                    _bibliotecaContext.PrestamoLibros.Add(prestamoLibro);
                 }
                 else
                 {
-                    _PersistenceContext.Attach(prestamoLibro).State = EntityState.Modified;
+                    _bibliotecaContext.Attach(prestamoLibro).State = EntityState.Modified;
                 }
 
-                if (await _PersistenceContext.SaveChangesAsync() > 0)
+                if (await _bibliotecaContext.SaveChangesAsync() > 0)
                 {
                     Resultado = prestamoLibro;
                 }
@@ -67,7 +67,7 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
                     diasPrestamo = 8;
                     break;
                 case 3:
-                    var tipoUsuario3 = await _PersistenceContext.PrestamoLibros.FirstOrDefaultAsync(
+                    var tipoUsuario3 = await _bibliotecaContext.PrestamoLibros.FirstOrDefaultAsync(
                         x => x.IdentificacionUsuario == prestamoLibro.IdentificacionUsuario);
                     if (tipoUsuario3 != null)
                     {
