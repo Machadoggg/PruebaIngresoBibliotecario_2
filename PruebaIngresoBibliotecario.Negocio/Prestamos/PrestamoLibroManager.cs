@@ -1,5 +1,4 @@
-﻿using PruebaIngresoBibliotecario.Dominio;
-using PruebaIngresoBibliotecario.Dominio.Prestamos;
+﻿using PruebaIngresoBibliotecario.Dominio.Prestamos;
 
 namespace PruebaIngresoBibliotecario.Negocio.Prestamos
 {
@@ -18,9 +17,9 @@ namespace PruebaIngresoBibliotecario.Negocio.Prestamos
             return await _prestamoLibroRepositorio.GuardarPrestamoLibro(prestamoLibro);
         }
 
-        public Task<PrestamoLibro> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
+        public async Task<PrestamoLibro> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
         {
-            throw new NotImplementedException();
+            return await _prestamoLibroRepositorio.SeleccionarPrestamoLibroPorId(idPrestamo);
         }
     }
 }

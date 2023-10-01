@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PruebaIngresoBibliotecario.Dominio.Usuarios
+﻿namespace PruebaIngresoBibliotecario.Dominio.Usuarios
 {
     public class Usuario
     {

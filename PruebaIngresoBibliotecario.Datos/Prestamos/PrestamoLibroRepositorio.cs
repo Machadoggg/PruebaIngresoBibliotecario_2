@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PruebaIngresoBibliotecario.Dominio;
 using PruebaIngresoBibliotecario.Dominio.Prestamos;
 using PruebaIngresoBibliotecario.Negocio.Prestamos;
 
@@ -59,7 +58,7 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
 
         private async Task<int> ValidarUsuario(PrestamoLibro prestamoLibro, int diasPrestamo)
         {
-            switch (prestamoLibro.TipoUsuario) 
+            switch (prestamoLibro.TipoUsuario)
             {
                 case 1:
                     diasPrestamo = 10;
@@ -83,9 +82,18 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
             return diasPrestamo;
         }
 
-        public Task<PrestamoLibro> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
+        public async Task<PrestamoLibro> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
         {
-            throw new NotImplementedException();
+            PrestamoLibro Resultado = default!;
+            try
+            {
+                Resultado = (await _bibliotecaContext.PrestamoLibros.FirstOrDefaultAsync(p => p.Id == idPrestamo))!;
+            }
+            catch (Exception)
+            {
+
+            }
+            return Resultado;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using PruebaIngresoBibliotecario.Dominio;
-using PruebaIngresoBibliotecario.Dominio.Prestamos;
+﻿using PruebaIngresoBibliotecario.Dominio.Prestamos;
 
 namespace PruebaIngresoBibliotecario.Negocio.Prestamos
 {

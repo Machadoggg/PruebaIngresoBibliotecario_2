@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PruebaIngresoBibliotecario.Dominio.Prestamos
 {
@@ -10,6 +8,6 @@ namespace PruebaIngresoBibliotecario.Dominio.Prestamos
         public Guid Isbn { get; set; }
         public string IdentificacionUsuario { get; set; } = default!;
         public int TipoUsuario { get; set; }
-        public DateTime? FechaMaximaDevolucion { get; set; }
+        public DateTime FechaMaximaDevolucion { get; set; }
     }
 }

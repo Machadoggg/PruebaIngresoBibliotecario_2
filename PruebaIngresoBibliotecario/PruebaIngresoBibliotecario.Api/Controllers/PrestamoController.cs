@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PruebaIngresoBibliotecario.Dominio;
 using PruebaIngresoBibliotecario.Dominio.Prestamos;
 using PruebaIngresoBibliotecario.Negocio.Prestamos;
-using System.CodeDom;
+using System;
 using System.Threading.Tasks;
 
 namespace PruebaIngresoBibliotecario.Api.Controllers
@@ -30,6 +29,19 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
             {
 
                 return BadRequest("El tipo de usuario no es valido.");
+            }
+        }
+
+        [HttpGet("{idPrestamo}")]
+        public async Task<ActionResult> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
+        {
+            try
+            {
+                return Ok(await _prestamoLibroManager.SeleccionarPrestamoLibroPorId(idPrestamo));
+            }
+            catch (Exception)
+            {
+                return NotFound(new { mensaje = "El prestamo con id " + idPrestamo + " no exite." });
             }
         }
 
