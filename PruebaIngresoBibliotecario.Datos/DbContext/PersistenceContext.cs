@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PruebaIngresoBibliotecario.Dominio;
-using System.Threading.Tasks;
 
 namespace PruebaIngresoBibliotecario.Datos
 {
@@ -15,7 +14,7 @@ namespace PruebaIngresoBibliotecario.Datos
             Config = config;
         }
 
-        public DbSet<PrestamoLibro> PrestamoLibros { get; set; }
+        public DbSet<PrestamoLibro> PrestamoLibros { get; set; } = default!;
 
         public async Task CommitAsync()
         {

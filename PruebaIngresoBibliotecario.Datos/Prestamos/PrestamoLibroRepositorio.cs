@@ -17,7 +17,7 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
 
         public async Task<PrestamoLibro> GuardarPrestamoLibro(PrestamoLibro prestamoLibro)
         {
-            PrestamoLibro Resultado = default;
+            PrestamoLibro Resultado = default!;
             try
             {
                 if (prestamoLibro.Id == Guid.Empty)
