@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PruebaIngresoBibliotecario.Dominio;
+using PruebaIngresoBibliotecario.Dominio.Prestamos;
 
 namespace PruebaIngresoBibliotecario.Datos
 {

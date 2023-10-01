@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PruebaIngresoBibliotecario.Dominio;
+using PruebaIngresoBibliotecario.Dominio.Prestamos;
 using PruebaIngresoBibliotecario.Negocio.Prestamos;
 using System.CodeDom;
 using System.Threading.Tasks;

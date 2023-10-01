@@ -1,12 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Text;
 
-namespace PruebaIngresoBibliotecario.Dominio
+namespace PruebaIngresoBibliotecario.Dominio.Libros
 {
     public class Libro
     {
-        [Key]
         public Guid Isbn { get; set; }
-        public string NombreLibro { get; set; } = default;
+        public string NombreLibro { get; set; } = default!;
     }
 }
