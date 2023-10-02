@@ -4,7 +4,7 @@ using PruebaIngresoBibliotecario.Negocio.Prestamos;
 using System;
 using System.Threading.Tasks;
 
-namespace PruebaIngresoBibliotecario.Api.Controllers
+namespace PruebaIngresoBibliotecario.Api.Controllers.Prestamos
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,7 +25,7 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
             {
                 return Ok(await _prestamoLibroManager.GuardarPrestamoLibro(prestamoLibro));
             }
-            catch (System.Exception)
+            catch (Exception)
             {
 
                 return BadRequest("El tipo de usuario no es valido.");
