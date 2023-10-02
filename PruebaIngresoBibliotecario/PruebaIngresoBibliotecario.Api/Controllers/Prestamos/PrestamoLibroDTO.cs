@@ -7,7 +7,7 @@ namespace PruebaIngresoBibliotecario.Api.Controllers.Prestamos
         public Guid Id { get; set; }
         public Guid Isbn { get; set; }
         public string IdentificacionUsuario { get; set; } = default!;
-        public int TipoUsuario { get; set; }
+        public string TipoUsuario { get; set; } = default!;
         public DateTime FechaMaximaDevolucion { get; set; }
     }
 }

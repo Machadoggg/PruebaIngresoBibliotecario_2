@@ -23,7 +23,7 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> PostPrestamo([FromBody] PrestamoLibroDTO prestamoLibro)
+        public async Task<ActionResult> PostPrestamo([FromBody] PrestamoLibro prestamoLibro)
         {
             var respuesta = new PrestamoLibroDTO();
 
@@ -32,10 +32,6 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
                 var modelo = _mapper.Map<PrestamoLibro>(prestamoLibro);
                 var prestamoCreado = await _prestamoLibroManager.GuardarPrestamoLibro(modelo);
                 respuesta = _mapper.Map<PrestamoLibroDTO>(prestamoCreado);
-
-
-
-
 
                 return Ok(respuesta);
             }
