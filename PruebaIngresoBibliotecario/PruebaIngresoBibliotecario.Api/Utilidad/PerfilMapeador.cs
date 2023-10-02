@@ -9,7 +9,18 @@ namespace PruebaIngresoBibliotecario.Api.Utilidad
         public PerfilMapeador()
         {
             #region
-            CreateMap<PrestamoLibro, PrestamoLibroDTO>().ReverseMap();
+            CreateMap<PrestamoLibroDTO, PrestamoLibro>();
+            // .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            //.ForMember(dest => dest.Isbn, opt => opt.MapFrom(src => src.Isbn))
+            //.ForMember(dest => dest.FechaMaximaDevolucion, opt => opt.MapFrom(src => src.FechaMaximaDevolucion));
+
+            CreateMap<PrestamoLibro, PrestamoLibroDTO>();
+                // .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                //.ForMember(dest => dest.Isbn, opt => opt.MapFrom(src => src.Isbn))
+                //.ForMember(dest => dest.FechaMaximaDevolucion, opt => opt.MapFrom(src => src.FechaMaximaDevolucion));
+
+
+            
             #endregion
         }
     }

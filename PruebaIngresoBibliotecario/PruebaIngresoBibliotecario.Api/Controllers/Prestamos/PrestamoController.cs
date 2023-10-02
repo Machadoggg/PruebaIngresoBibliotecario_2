@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using PruebaIngresoBibliotecario.Api.Controllers.Prestamos;
 using PruebaIngresoBibliotecario.Dominio.Prestamos;
 using PruebaIngresoBibliotecario.Negocio.Prestamos;
 using System;
@@ -11,24 +13,35 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
     public class PrestamoController : ControllerBase
     {
         private readonly IPrestamoLibroManager _prestamoLibroManager;
+        private readonly IMapper _mapper;
 
-        public PrestamoController(IPrestamoLibroManager prestamoLibroManager)
+        public PrestamoController(IPrestamoLibroManager prestamoLibroManager, IMapper mapper)
         {
             _prestamoLibroManager = prestamoLibroManager;
+            _mapper = mapper;
         }
 
 
         [HttpPost]
-        public async Task<ActionResult> PostPrestamo([FromBody] PrestamoLibro prestamoLibro)
+        public async Task<ActionResult> PostPrestamo([FromBody] PrestamoLibroDTO prestamoLibro)
         {
+            var respuesta = new PrestamoLibroDTO();
+
             try
             {
-                return Ok(await _prestamoLibroManager.GuardarPrestamoLibro(prestamoLibro));
-            }
-            catch (System.Exception)
-            {
+                var modelo = _mapper.Map<PrestamoLibro>(prestamoLibro);
+                var prestamoCreado = await _prestamoLibroManager.GuardarPrestamoLibro(modelo);
+                respuesta = _mapper.Map<PrestamoLibroDTO>(prestamoCreado);
 
-                return BadRequest("El tipo de usuario no es valido.");
+
+
+
+
+                return Ok(respuesta);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.Message);
             }
         }
 

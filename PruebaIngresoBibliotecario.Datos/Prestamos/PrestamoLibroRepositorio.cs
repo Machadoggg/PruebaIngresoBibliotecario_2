@@ -17,43 +17,35 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
 
         public async Task<PrestamoLibro> GuardarPrestamoLibro(PrestamoLibro prestamoLibro)
         {
-            PrestamoLibro Resultado = default!;
-            try
+            
+
+            if (!Guid.TryParse(prestamoLibro.Isbn.ToString(), out _))
             {
-                if (prestamoLibro.Id == Guid.Empty)
-                {
-                    var weekend = new[] { DayOfWeek.Saturday, DayOfWeek.Sunday };
-                    var fechaDevolucion = DateTime.Now;
-                    int diasPrestamo = 0;
-
-                    diasPrestamo = await ValidarUsuario(prestamoLibro, diasPrestamo);
-
-                    for (int i = 0; i < diasPrestamo;)
-                    {
-                        fechaDevolucion = fechaDevolucion.AddDays(1);
-                        i = (!weekend.Contains(fechaDevolucion.DayOfWeek)) ? ++i : i;
-                    }
-
-                    prestamoLibro.FechaMaximaDevolucion = fechaDevolucion;
-                    prestamoLibro.Id = Guid.NewGuid();
-                    _bibliotecaContext.PrestamoLibros.Add(prestamoLibro);
-                }
-                else
-                {
-                    _bibliotecaContext.Attach(prestamoLibro).State = EntityState.Modified;
-                }
-
-                if (await _bibliotecaContext.SaveChangesAsync() > 0)
-                {
-                    Resultado = prestamoLibro;
-                }
+                return prestamoLibro;
             }
-            catch (Exception)
+            var prestamo = new PrestamoLibro
             {
+                Isbn = prestamoLibro.Isbn,
+                IdentificacionUsuario = prestamoLibro.IdentificacionUsuario,
+                TipoUsuario = prestamoLibro.TipoUsuario
+            };
+            var weekend = new[] { DayOfWeek.Saturday, DayOfWeek.Sunday };
+            var fechaDevolucion = DateTime.Now;
+            int diasPrestamo = 0;
 
-                throw;
+            diasPrestamo = await ValidarUsuario(prestamoLibro, diasPrestamo);
+
+            for (int i = 0; i < diasPrestamo;)
+            {
+                fechaDevolucion = fechaDevolucion.AddDays(1);
+                i = (!weekend.Contains(fechaDevolucion.DayOfWeek)) ? ++i : i;
             }
-            return Resultado;
+            prestamo.FechaMaximaDevolucion = fechaDevolucion;
+            prestamo.Id = Guid.NewGuid();
+            _bibliotecaContext.PrestamoLibros.Add(prestamo);
+            await _bibliotecaContext.SaveChangesAsync();
+            
+            return prestamo;
         }
 
         private async Task<int> ValidarUsuario(PrestamoLibro prestamoLibro, int diasPrestamo)
@@ -67,9 +59,9 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
                     diasPrestamo = 8;
                     break;
                 case 3:
-                    var tipoUsuario3 = await _bibliotecaContext.PrestamoLibros.FirstOrDefaultAsync(
+                    var usuarioPrestamo = await _bibliotecaContext.PrestamoLibros.FirstOrDefaultAsync(
                         x => x.IdentificacionUsuario == prestamoLibro.IdentificacionUsuario);
-                    if (tipoUsuario3 != null)
+                    if (usuarioPrestamo != null)
                     {
                         break;
                     }

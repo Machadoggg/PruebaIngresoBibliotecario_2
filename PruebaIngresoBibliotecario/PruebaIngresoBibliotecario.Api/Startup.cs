@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using PruebaIngresoBibliotecario.Negocio.Prestamos;
 using PruebaIngresoBibliotecario.Datos.Prestamos;
 using PruebaIngresoBibliotecario.Datos;
+using AutoMapper;
+using PruebaIngresoBibliotecario.Api.Utilidad;
 
 namespace PruebaIngresoBibliotecario.Api
 {
@@ -37,6 +39,8 @@ namespace PruebaIngresoBibliotecario.Api
             services.AddControllers(mvcOpts =>
             {
             });
+
+            services.AddAutoMapper(typeof(Startup));
 
 
             services.AddScoped<IPrestamoLibroRepositorio, PrestamoLibroRepositorio>();
