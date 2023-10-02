@@ -46,11 +46,16 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
         {
             try
             {
-                return Ok(await _prestamoLibroManager.SeleccionarPrestamoLibroPorId(idPrestamo));
+                var resultado = await _prestamoLibroManager.SeleccionarPrestamoLibroPorId(idPrestamo).ConfigureAwait(false);
+
+                if (resultado == null)
+                    return NotFound((new { mensaje = "El prestamo con id " + idPrestamo + " no exite." }));
+
+                return Ok(resultado);
             }
             catch (Exception)
             {
-                return NotFound(new { mensaje = "El prestamo con id " + idPrestamo + " no exite." });
+                return StatusCode(500);
             }
         }
 

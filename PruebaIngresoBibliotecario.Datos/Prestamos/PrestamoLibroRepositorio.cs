@@ -74,18 +74,18 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
             return diasPrestamo;
         }
 
-        public async Task<PrestamoLibro> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
+        public async Task<PrestamoLibro?> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
         {
-            PrestamoLibro Resultado = default!;
+            
             try
             {
-                Resultado = (await _bibliotecaContext.PrestamoLibros.FirstOrDefaultAsync(p => p.Id == idPrestamo))!;
+                var resultado = (await _bibliotecaContext.PrestamoLibros.FirstOrDefaultAsync(p => p.Id == idPrestamo))!;
+                return resultado;
             }
             catch (Exception)
             {
-
+                throw;
             }
-            return Resultado;
         }
     }
 }
