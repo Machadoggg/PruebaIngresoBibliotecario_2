@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PruebaIngresoBibliotecario.Dominio.Prestamos;
+using PruebaIngresoBibliotecario.Dominio.Usuarios;
 using PruebaIngresoBibliotecario.Negocio.Prestamos;
 
 namespace PruebaIngresoBibliotecario.Datos.Prestamos
@@ -35,6 +36,8 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
 
             diasPrestamo = await ValidarUsuario(prestamoLibro, diasPrestamo);
 
+            
+
             for (int i = 0; i < diasPrestamo;)
             {
                 fechaDevolucion = fechaDevolucion.AddDays(1);
@@ -52,24 +55,24 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
         {
             switch (prestamoLibro.TipoUsuario)
             {
-                case 1:
+                case TipoUsuario.AFILIADO:
                     diasPrestamo = 10;
                     break;
-                case 2:
+                case TipoUsuario.EMPLEADO:
                     diasPrestamo = 8;
                     break;
-                case 3:
-                    var usuarioPrestamo = await _bibliotecaContext.PrestamoLibros.FirstOrDefaultAsync(
+                case TipoUsuario.INVITADO:
+                   var usuarioPrestamo = await _bibliotecaContext.PrestamoLibros.FirstOrDefaultAsync(
                         x => x.IdentificacionUsuario == prestamoLibro.IdentificacionUsuario);
                     if (usuarioPrestamo != null)
                     {
-                        break;
+                        throw new InvalidOperationException();
                     }
 
                     diasPrestamo = 7;
                     break;
                 default:
-                    break;
+                    throw new Exception(); ;
             }
             return diasPrestamo;
         }

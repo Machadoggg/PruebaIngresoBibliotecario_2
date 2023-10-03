@@ -25,19 +25,21 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> PostPrestamo([FromBody] PrestamoLibro prestamoLibro)
         {
-            var respuesta = new PrestamoLibroDTO();
-
             try
             {
                 var modelo = _mapper.Map<PrestamoLibro>(prestamoLibro);
                 var prestamoCreado = await _prestamoLibroManager.GuardarPrestamoLibro(modelo);
-                respuesta = _mapper.Map<PrestamoLibroDTO>(prestamoCreado);
+                var respuesta = _mapper.Map<PrestamoLibroDTO>(prestamoCreado);
 
                 return Ok(respuesta);
             }
+            catch (InvalidOperationException)
+            {
+                return StatusCode(400, new { mensaje = $"El usuario con identificacion {prestamoLibro.IdentificacionUsuario} ya tiene un libro prestado por lo cual no se le puede realizar otro prestamo" });
+            }
             catch (Exception ex)
             {
-                return StatusCode(400, ex.Message);
+                return StatusCode(400, new { mensaje = ex.Message });
             }
         }
 

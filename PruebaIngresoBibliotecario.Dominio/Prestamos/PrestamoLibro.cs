@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PruebaIngresoBibliotecario.Dominio.Usuarios;
+using System;
 
 namespace PruebaIngresoBibliotecario.Dominio.Prestamos
 {
@@ -7,7 +8,7 @@ namespace PruebaIngresoBibliotecario.Dominio.Prestamos
         public Guid Id { get; set; }
         public Guid Isbn { get; set; }
         public string IdentificacionUsuario { get; set; } = default!;
-        public int TipoUsuario { get; set; }
+        public TipoUsuario TipoUsuario { get; set; }
         public DateTime FechaMaximaDevolucion { get; set; }
     }
 }
