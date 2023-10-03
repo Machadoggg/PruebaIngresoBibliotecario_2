@@ -18,12 +18,6 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
 
         public async Task<PrestamoLibro> GuardarPrestamoLibro(PrestamoLibro prestamoLibro)
         {
-            
-
-            //if (!Guid.TryParse(prestamoLibro.Isbn.ToString(), out _))
-            //{
-            //    return prestamoLibro;
-            //}
             var prestamo = new PrestamoLibro
             {
                 Isbn = prestamoLibro.Isbn,
@@ -44,7 +38,6 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
                 i = (!weekend.Contains(fechaDevolucion.DayOfWeek)) ? ++i : i;
             }
             prestamo.FechaMaximaDevolucion = fechaDevolucion;
-            prestamo.Id = Guid.NewGuid();
             _bibliotecaContext.PrestamoLibros.Add(prestamo);
             await _bibliotecaContext.SaveChangesAsync();
             
