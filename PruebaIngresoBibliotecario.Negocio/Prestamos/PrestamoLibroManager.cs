@@ -17,7 +17,7 @@ namespace PruebaIngresoBibliotecario.Negocio.Prestamos
             return await _prestamoLibroRepositorio.GuardarPrestamoLibro(prestamoLibro);
         }
 
-        public async Task<PrestamoLibro> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
+        public async Task<PrestamoLibro?> SeleccionarPrestamoLibroPorId(Guid idPrestamo)
         {
             return await _prestamoLibroRepositorio.SeleccionarPrestamoLibroPorId(idPrestamo);
         }

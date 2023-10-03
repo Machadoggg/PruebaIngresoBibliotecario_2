@@ -6,6 +6,6 @@ namespace PruebaIngresoBibliotecario.Negocio.Prestamos
     {
         Task<PrestamoLibro> GuardarPrestamoLibro(PrestamoLibro prestamoLibro);
 
-        Task<PrestamoLibro> SeleccionarPrestamoLibroPorId(Guid idPrestamo);
+        Task<PrestamoLibro?> SeleccionarPrestamoLibroPorId(Guid idPrestamo);
     }
 }
