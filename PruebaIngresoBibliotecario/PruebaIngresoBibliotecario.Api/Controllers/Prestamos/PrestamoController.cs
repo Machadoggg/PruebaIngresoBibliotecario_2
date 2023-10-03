@@ -31,7 +31,7 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
                 var prestamoCreado = await _prestamoLibroManager.GuardarPrestamoLibro(modelo);
                 var respuesta = _mapper.Map<PrestamoLibroDTO>(prestamoCreado);
 
-                return Ok(respuesta);
+                return Ok(new { id = respuesta.Id, respuesta.FechaMaximaDevolucion });
             }
             catch (InvalidOperationException)
             {
