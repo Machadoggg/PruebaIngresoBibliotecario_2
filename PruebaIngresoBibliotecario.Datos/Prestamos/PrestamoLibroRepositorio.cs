@@ -20,10 +20,10 @@ namespace PruebaIngresoBibliotecario.Datos.Prestamos
         {
             
 
-            if (!Guid.TryParse(prestamoLibro.Isbn.ToString(), out _))
-            {
-                return prestamoLibro;
-            }
+            //if (!Guid.TryParse(prestamoLibro.Isbn.ToString(), out _))
+            //{
+            //    return prestamoLibro;
+            //}
             var prestamo = new PrestamoLibro
             {
                 Isbn = prestamoLibro.Isbn,
